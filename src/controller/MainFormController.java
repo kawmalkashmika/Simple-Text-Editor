@@ -23,9 +23,14 @@ public class MainFormController {
     public Path sourcePath;
     public Path destinationPath;
     public String fileName;
+    public MenuItem mnitmNew;
+    public MenuItem mnitmOpen;
+    public MenuItem mnitmSave;
+    public MenuItem mnitmPrint;
+    public MenuItem mnitmExit;
 
     public void initialize() {
-
+    menuItemlistners();
 
     }
 
@@ -81,20 +86,20 @@ public class MainFormController {
         try {
             Files.createFile(destinationPath);
         } catch (IOException e) {
-           new Alert(Alert.AlertType.WARNING,"This file already exist").showAndWait();
+            new Alert(Alert.AlertType.WARNING, "This file already exist").showAndWait();
         }
         FileChannel fc = null;
         try {
             fc = FileChannel.open(destinationPath, StandardOpenOption.WRITE);
         } catch (IOException e) {
-            new Alert(Alert.AlertType.WARNING,"This file missing right now").showAndWait();
+            new Alert(Alert.AlertType.WARNING, "This file missing right now").showAndWait();
         }
         ByteBuffer buffer = ByteBuffer.wrap(bytes);
         try {
             fc.write(buffer);
             fc.close();
         } catch (IOException e) {
-            new Alert(Alert.AlertType.WARNING,"Please check the programme files").showAndWait();
+            new Alert(Alert.AlertType.WARNING, "Please check the programme files").showAndWait();
         }
 
     }
@@ -105,7 +110,32 @@ public class MainFormController {
         dialogBox.showAndWait();
         TextField in = dialogBox.getEditor();
         String fileName = in.getText();
-        return "/"+fileName;
+        return "/" + fileName;
+
+    }
+
+    private void menuItemlistners(){
+        mnitmNew.setOnAction(event -> {
+            txtText.clear();
+        });
+
+         mnitmOpen.setOnAction(event -> {
+             try {
+                 openTextFile();
+             } catch (IOException e) {
+                 e.printStackTrace();
+             }
+         });
+
+         mnitmSave.setOnAction(event -> {
+             saveTextFile();
+         });
+
+         mnitmExit.setOnAction(event -> {
+             System.exit(0);
+         });
+
+
 
     }
 
