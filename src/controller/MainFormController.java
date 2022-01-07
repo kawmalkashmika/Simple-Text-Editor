@@ -1,11 +1,7 @@
 package controller;
 
-import com.sun.glass.ui.CommonDialogs;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
@@ -18,35 +14,21 @@ import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
 
 public class MainFormController {
     public TextArea txtText;
-    public Path sourcePath;
-    public String fileName;
-    public String selectedText;
-    public MenuButton btnFile;
-    public MenuButton btnEdit;
-    public MenuButton btnHelp;
     public AnchorPane anchorPane;
+    public Path sourcePath;
+    public Path destinationPath;
+    public String fileName;
 
     public void initialize() {
 
 
     }
 
-    private void saveTest() {
-
-
-        //Choose directory
-
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Select text file");
-        File file = directoryChooser.showDialog(null);
-        String destinationPath = file.getAbsolutePath();
-        //copyPath = Paths.get(file.getAbsolutePath());
-        //System.out.println(copyPath);
-
-    }
 
     private void openTextFile() throws IOException {
 
@@ -59,7 +41,7 @@ public class MainFormController {
         File file = fileChooser.showOpenDialog(null);
         String sourcePathString = file.getAbsolutePath();
         fileName = file.getName();
-        sourcePath= Paths.get(sourcePathString);
+        sourcePath = Paths.get(sourcePathString);
 
         //Read file from Source path
 
@@ -74,43 +56,70 @@ public class MainFormController {
     }
 
 
-    private void saveTextFile(){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Text Files", "*.txt"));
-        File selectedFile = fileChooser.showOpenDialog(anchorPane.getScene().getWindow());
-        System.out.println(selectedFile.getAbsolutePath());
-        if (selectedFile != null) {
-           // .display(selectedFile);
-        }else {
-            System.out.println("Pakaya");
+    private void saveTextFile() {
+
+        //Select a destination path
+
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Select destination here");
+        File file = directoryChooser.showDialog(null);
+        String destinationPathString = file.getAbsolutePath();
+        destinationPath = Paths.get(file.getAbsolutePath() + setFileName());
+        TextInputDialog dilogBox = new TextInputDialog();
+        dilogBox.setTitle("input file Name");
+        System.out.println(destinationPath);
+
+        //Convert text values into bytes
+
+
+        byte[] bytes = txtText.getText().getBytes();
+
+        //Copy file into destination
+
+
+        try {
+            Files.createFile(destinationPath);
+        } catch (IOException e) {
+           new Alert(Alert.AlertType.WARNING,"This file already exist").showAndWait();
         }
+        FileChannel fc = null;
+        try {
+            fc = FileChannel.open(destinationPath, StandardOpenOption.WRITE);
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.WARNING,"This file missing right now").showAndWait();
+        }
+        ByteBuffer buffer = ByteBuffer.wrap(bytes);
+        try {
+            fc.write(buffer);
+            fc.close();
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.WARNING,"Please check the programme files").showAndWait();
+        }
+
+    }
+
+    private String setFileName() {
+        TextInputDialog dialogBox = new TextInputDialog();
+        dialogBox.setTitle("input file Name");
+        dialogBox.showAndWait();
+        TextField in = dialogBox.getEditor();
+        String fileName = in.getText();
+        return "/"+fileName;
+
     }
 
 
     public void btnOpenOnAction(ActionEvent actionEvent) throws IOException {
-      openTextFile();
+        openTextFile();
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) throws IOException {
-        //save();
-        saveTest();
-
+        saveTextFile();
     }
 
     public void btnNewOnAction(ActionEvent actionEvent) throws IOException {
-        /*DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Select Destination Folder");
-        File file = directoryChooser.showDialog(null);
-        String destinationPath = file.getAbsolutePath();
-        path= Paths.get(file.getAbsolutePath());
-
-        String fileContent=txtText.getText();
-        byte[] bytes=fileContent.getBytes();
-        OutputStream os=Files.newOutputStream(Paths.get(path + "/sample.txt"));
-        os.write(bytes);
-        os.close();*/
+        txtText.clear();
     }
 
     public void btnCut(ActionEvent actionEvent) {
@@ -137,35 +146,6 @@ public class MainFormController {
         int index = txtText.getCaretPosition();
         txtText.insertText(index, text);
 
-    }
-
-    private void save() throws IOException {
-       /*File ops=new File(path+"/"+fileName);
-
-        String content=txtText.getText();
-
-        byte[] bytes=content.getBytes();
-
-       FileOutputStream st=new FileOutputStream(ops);
-        st.write(bytes);
-        st.close();*/
-
-    }
-
-    private void open() throws IOException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Source File");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files only", "*.txt"));
-        File file = fileChooser.showOpenDialog(null);
-        String sourcePath = file.getAbsolutePath();
-        //path= Paths.get(sourcePath);
-        fileName = file.getName();
-
-        InputStream is = Files.newInputStream(Paths.get(sourcePath));
-        byte[] fileBytes = new byte[is.available()];
-        is.read(fileBytes);
-        String fileContent = new String(fileBytes);
-        txtText.setText(fileContent);
     }
 
 
