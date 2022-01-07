@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="704.0" prefWidth="666.0" style="-fx-background-color: #FAE5D3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
+   <children>
+      <MenuButton fx:id="btnFile" contentDisplay="CENTER" layoutX="175.0" layoutY="115.0" mnemonicParsing="false" text="File" textFill="#528d16" AnchorPane.bottomAnchor="556.0" AnchorPane.topAnchor="115.0">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </MenuButton>
+      <MenuButton fx:id="btnEdit" layoutX="258.0" layoutY="115.0" mnemonicParsing="false" text="Edit" textFill="#528d16" AnchorPane.bottomAnchor="556.0" AnchorPane.topAnchor="115.0">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+         </items>
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </MenuButton>
+      <MenuButton fx:id="btnHelp" layoutX="344.0" layoutY="115.0" mnemonicParsing="false" text="help" textFill="#528d16" AnchorPane.bottomAnchor="556.0" AnchorPane.topAnchor="115.0">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+         </items>
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </MenuButton>
+      <TextArea fx:id="txtText" layoutX="25.0" layoutY="250.0" prefHeight="372.0" prefWidth="607.0" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="250.0" />
+      <Button layoutX="119.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnOpenOnAction" style="-fx-background-radius: 50;" text="Open" textFill="#a15f19">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="202.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-radius: 50;" text="Save" textFill="#a15f19">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="280.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnNewOnAction" style="-fx-background-radius: 50;" text="New" textFill="#a15f19">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="352.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnCut" style="-fx-background-radius: 50;" text="Cut" textFill="#a15f19">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="423.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnCopy" style="-fx-background-radius: 50;" text="Copy" textFill="#a15f19">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="495.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnPaste" style="-fx-background-radius: 50;" text="Paste" textFill="#a15f19">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="141.0" layoutY="42.0" text="Sample Text Editor" AnchorPane.bottomAnchor="621.0" AnchorPane.leftAnchor="141.0" AnchorPane.rightAnchor="159.0" AnchorPane.topAnchor="42.0">
+         <font>
+            <Font name="System Bold Italic" size="34.0" />
+         </font>
+      </Label>
+      <Label layoutX="38.0" layoutY="644.0" prefHeight="33.0" prefWidth="112.0" text="Version 1.0.0" textFill="#ab9a9a">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
