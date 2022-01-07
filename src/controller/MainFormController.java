@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.glass.ui.CommonDialogs;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.MenuButton;
@@ -7,40 +8,99 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class MainFormController {
     public TextArea txtText;
-    public Path path;
+    public Path sourcePath;
     public String fileName;
     public String selectedText;
     public MenuButton btnFile;
     public MenuButton btnEdit;
     public MenuButton btnHelp;
+    public AnchorPane anchorPane;
 
-    public void initialize(){
-        setMenus();
-        System.out.println();
+    public void initialize() {
+
 
     }
 
+    private void saveTest() {
+
+
+        //Choose directory
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Select text file");
+        File file = directoryChooser.showDialog(null);
+        String destinationPath = file.getAbsolutePath();
+        //copyPath = Paths.get(file.getAbsolutePath());
+        //System.out.println(copyPath);
+
+    }
+
+    private void openTextFile() throws IOException {
+
+        //select source path
+
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select file here");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files only", "*.txt"));
+        File file = fileChooser.showOpenDialog(null);
+        String sourcePathString = file.getAbsolutePath();
+        fileName = file.getName();
+        sourcePath= Paths.get(sourcePathString);
+
+        //Read file from Source path
+
+
+        FileChannel fileChannel = FileChannel.open(sourcePath);
+        ByteBuffer allocate = ByteBuffer.allocate((int) fileChannel.size());
+        fileChannel.read(allocate);
+        fileChannel.close();
+        byte[] array = allocate.array();
+        txtText.setText(new String(array));
+
+    }
+
+
+    private void saveTextFile(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        File selectedFile = fileChooser.showOpenDialog(anchorPane.getScene().getWindow());
+        System.out.println(selectedFile.getAbsolutePath());
+        if (selectedFile != null) {
+           // .display(selectedFile);
+        }else {
+            System.out.println("Pakaya");
+        }
+    }
+
+
     public void btnOpenOnAction(ActionEvent actionEvent) throws IOException {
-        open();
+      openTextFile();
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) throws IOException {
-        save();
+        //save();
+        saveTest();
 
     }
 
     public void btnNewOnAction(ActionEvent actionEvent) throws IOException {
-        DirectoryChooser directoryChooser = new DirectoryChooser();
+        /*DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select Destination Folder");
         File file = directoryChooser.showDialog(null);
         String destinationPath = file.getAbsolutePath();
@@ -50,49 +110,45 @@ public class MainFormController {
         byte[] bytes=fileContent.getBytes();
         OutputStream os=Files.newOutputStream(Paths.get(path + "/sample.txt"));
         os.write(bytes);
-        os.close();
+        os.close();*/
     }
 
     public void btnCut(ActionEvent actionEvent) {
-        Clipboard cp=Clipboard.getSystemClipboard();
-        ClipboardContent content=new ClipboardContent();
+        Clipboard cp = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
         content.putString(txtText.getSelectedText());
         cp.setContent(content);
 
-        txtText.setText(txtText.getSelectedText().replace("",""));
-
-
-
-
+        txtText.setText(txtText.getSelectedText().replace("", ""));
 
 
     }
 
     public void btnCopy(ActionEvent actionEvent) {
-        Clipboard cp=Clipboard.getSystemClipboard();
-        ClipboardContent content=new ClipboardContent();
+        Clipboard cp = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
         content.putString(txtText.getSelectedText());
         cp.setContent(content);
     }
 
     public void btnPaste(ActionEvent actionEvent) {
-        Clipboard cp=Clipboard.getSystemClipboard();
-        String text=cp.getString();
-        int index=txtText.getCaretPosition();
-        txtText.insertText(index,text);
+        Clipboard cp = Clipboard.getSystemClipboard();
+        String text = cp.getString();
+        int index = txtText.getCaretPosition();
+        txtText.insertText(index, text);
 
     }
 
     private void save() throws IOException {
-        File ops=new File(path+"/"+fileName);
+       /*File ops=new File(path+"/"+fileName);
 
         String content=txtText.getText();
 
         byte[] bytes=content.getBytes();
 
-        FileOutputStream st=new FileOutputStream(ops);
+       FileOutputStream st=new FileOutputStream(ops);
         st.write(bytes);
-        st.close();
+        st.close();*/
 
     }
 
@@ -102,87 +158,14 @@ public class MainFormController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files only", "*.txt"));
         File file = fileChooser.showOpenDialog(null);
         String sourcePath = file.getAbsolutePath();
-        path= Paths.get(sourcePath);
-        fileName=file.getName();
+        //path= Paths.get(sourcePath);
+        fileName = file.getName();
 
-        InputStream is= Files.newInputStream(Paths.get(sourcePath));
-        byte[] fileBytes=new byte[is.available()];
+        InputStream is = Files.newInputStream(Paths.get(sourcePath));
+        byte[] fileBytes = new byte[is.available()];
         is.read(fileBytes);
-        String fileContent=new String(fileBytes);
+        String fileContent = new String(fileBytes);
         txtText.setText(fileContent);
-    }
-
-    private void setMenus(){
-        btnFile.getItems().clear();
-        btnEdit.getItems().clear();
-        btnHelp.getItems().clear();
-
-        MenuItem menuItem1f = new MenuItem("New");
-        MenuItem menuItem2f = new MenuItem("Open");
-        MenuItem menuItem3f = new MenuItem("Save");
-        MenuItem menuItem4f = new MenuItem("Print");
-        MenuItem menuItem5f = new MenuItem("Exit");
-
-        btnFile.getItems().addAll(menuItem1f,menuItem2f,menuItem3f,menuItem4f,menuItem5f);
-
-        MenuItem menuItem1e= new MenuItem("cut");
-        MenuItem menuItem2e = new MenuItem("copy");
-        MenuItem menuItem3e = new MenuItem("paste");
-        MenuItem menuItem4e= new MenuItem("Select All");
-
-        btnEdit.getItems().addAll(menuItem1e,menuItem2e,menuItem3e,menuItem4e);
-
-        menuItem1e.setOnAction(event -> {
-            DirectoryChooser directoryChooser = new DirectoryChooser();
-            directoryChooser.setTitle("Select Destination Folder");
-            File file = directoryChooser.showDialog(null);
-            String destinationPath = file.getAbsolutePath();
-            path= Paths.get(file.getAbsolutePath());
-
-            String fileContent=txtText.getText();
-            byte[] bytes=fileContent.getBytes();
-            OutputStream os= null;
-            try {
-                os = Files.newOutputStream(Paths.get(path + "/sample.txt"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                os.write(bytes);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                os.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        });
-
-        menuItem2e.setOnAction(event -> {
-            try {
-                open();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        menuItem3f.setOnAction(event -> {
-            try {
-                save();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        menuItem4f.setOnAction(event -> {
-            System.out.println("Print");
-        });
-
-        menuItem5f.setOnAction(event -> {
-            System.exit(0);
-        });
     }
 
 
