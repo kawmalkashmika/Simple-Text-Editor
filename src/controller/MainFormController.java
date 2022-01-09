@@ -7,6 +7,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import model.SubString;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -15,6 +16,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class MainFormController {
@@ -28,10 +32,67 @@ public class MainFormController {
     public MenuItem mnitmSave;
     public MenuItem mnitmPrint;
     public MenuItem mnitmExit;
+    public MenuBar mnbar;
+    public TextField txtFind;
+    public Button btnFind;
+    public TextField txtReplace;
+    public Button btnReplace;
+    public RadioButton radioRegx;
+    public RadioButton radioUppercase;
+    public Button btnNext;
+    public Matcher matcher;
+    public Button btnPrevious;
+    ArrayList<SubString> indexes=new ArrayList<>();
+    public static int counter=-1;
+
 
     public void initialize() {
     menuItemlistners();
 
+    //Select previous result
+
+
+    btnPrevious.setOnAction(event -> {
+        if(counter>=0){
+            counter--;
+            txtText.selectRange(indexes.get(counter).getStartIndex(),indexes.get(counter).getEndIndex());
+        }else {
+            counter=indexes.size()-1;
+        }
+    });
+
+
+    //Select next result
+
+
+    btnNext.setOnAction(event -> {
+       if(counter<indexes.size()-1){
+           counter++;
+           txtText.selectRange(indexes.get(counter).getStartIndex(),indexes.get(counter).getEndIndex());
+       }else {
+           counter=-1;
+       }
+    });
+
+
+    txtFind.textProperty().addListener(observable -> {
+        indexes.clear();
+        int startingIndex=0;
+        int endingIndex=0;
+        int matchingCount=0;
+        matcher= Pattern.compile(txtFind.getText()).matcher(txtText.getText());
+        while (matcher.find()){
+            startingIndex=matcher.start();
+            endingIndex=matcher.end();
+            indexes.add(new SubString(startingIndex,endingIndex));
+            matchingCount++;
+
+        }
+        System.out.println(matchingCount);
+        System.out.println(indexes.toString());
+
+
+    });
     }
 
 
@@ -137,6 +198,8 @@ public class MainFormController {
 
 
 
+
+
     }
 
 
@@ -153,24 +216,36 @@ public class MainFormController {
     }
 
     public void btnCut(ActionEvent actionEvent) {
-        Clipboard cp = Clipboard.getSystemClipboard();
-        ClipboardContent content = new ClipboardContent();
-        content.putString(txtText.getSelectedText());
-        cp.setContent(content);
-
-        txtText.setText(txtText.getSelectedText().replace("", ""));
-
-
+        cut();
     }
 
     public void btnCopy(ActionEvent actionEvent) {
+        copy();
+    }
+
+    public void btnPaste(ActionEvent actionEvent) {
+        paste();
+    }
+
+    public void cut() {
         Clipboard cp = Clipboard.getSystemClipboard();
         ClipboardContent content = new ClipboardContent();
         content.putString(txtText.getSelectedText());
         cp.setContent(content);
+
     }
 
-    public void btnPaste(ActionEvent actionEvent) {
+
+
+    public void copy() {
+        Clipboard cp = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(txtText.getSelectedText());
+        cp.setContent(content);
+
+    }
+
+    public void paste() {
         Clipboard cp = Clipboard.getSystemClipboard();
         String text = cp.getString();
         int index = txtText.getCaretPosition();
@@ -178,5 +253,14 @@ public class MainFormController {
 
     }
 
+    private void findText(String text,String word){
 
+
+
+    }
+
+
+    public void findButtonOnAction(ActionEvent actionEvent) {
+        findText(txtText.getText(),txtFind.getText());
+    }
 }
