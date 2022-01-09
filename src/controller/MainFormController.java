@@ -42,29 +42,28 @@ public class MainFormController {
     public Button btnNext;
     public Matcher matcher;
     public Button btnPrevious;
+    public Label txtWordCount;
     ArrayList<SubString> indexes=new ArrayList<>();
     public static int counter=-1;
 
 
     public void initialize() {
+
     menuItemlistners();
+    findReplaceUIController(false);
 
-    //Select previous result
-
-
+    btnReplace.setOnAction(event -> {
+        replace();
+    });
     btnPrevious.setOnAction(event -> {
         if(counter>=0){
             counter--;
             txtText.selectRange(indexes.get(counter).getStartIndex(),indexes.get(counter).getEndIndex());
         }else {
-            counter=indexes.size()-1;
+            counter=indexes.size()-2;
         }
+        txtWordCount.setText(String.valueOf(counter));
     });
-
-
-    //Select next result
-
-
     btnNext.setOnAction(event -> {
        if(counter<indexes.size()-1){
            counter++;
@@ -72,27 +71,51 @@ public class MainFormController {
        }else {
            counter=-1;
        }
+       txtWordCount.setText(String.valueOf(counter));
     });
-
 
     txtFind.textProperty().addListener(observable -> {
-        indexes.clear();
-        int startingIndex=0;
-        int endingIndex=0;
-        int matchingCount=0;
-        matcher= Pattern.compile(txtFind.getText()).matcher(txtText.getText());
-        while (matcher.find()){
-            startingIndex=matcher.start();
-            endingIndex=matcher.end();
-            indexes.add(new SubString(startingIndex,endingIndex));
-            matchingCount++;
-
-        }
-        System.out.println(matchingCount);
-        System.out.println(indexes.toString());
-
-
+        find();
     });
+    txtText.textProperty().addListener(observable -> {
+        find();
+    });
+
+    }
+
+
+    private void menuItemlistners(){
+        mnitmNew.setOnAction(event -> {
+            txtText.clear();
+        });
+
+        mnitmOpen.setOnAction(event -> {
+            try {
+                openTextFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        mnitmSave.setOnAction(event -> {
+            saveTextFile();
+        });
+
+        mnitmExit.setOnAction(event -> {
+            System.exit(0);
+        });
+
+
+
+
+
+    }
+    private void findReplaceUIController(boolean visibility){
+        txtFind.setVisible(visibility);
+        btnNext.setVisible(visibility);
+        btnPrevious.setVisible(visibility);
+        btnReplace.setVisible(visibility);
+        txtReplace.setVisible(visibility);
     }
 
 
@@ -120,7 +143,6 @@ public class MainFormController {
         txtText.setText(new String(array));
 
     }
-
 
     private void saveTextFile() {
 
@@ -175,34 +197,8 @@ public class MainFormController {
 
     }
 
-    private void menuItemlistners(){
-        mnitmNew.setOnAction(event -> {
-            txtText.clear();
-        });
 
-         mnitmOpen.setOnAction(event -> {
-             try {
-                 openTextFile();
-             } catch (IOException e) {
-                 e.printStackTrace();
-             }
-         });
-
-         mnitmSave.setOnAction(event -> {
-             saveTextFile();
-         });
-
-         mnitmExit.setOnAction(event -> {
-             System.exit(0);
-         });
-
-
-
-
-
-    }
-
-
+    //Button on actions
     public void btnOpenOnAction(ActionEvent actionEvent) throws IOException {
         openTextFile();
     }
@@ -227,6 +223,8 @@ public class MainFormController {
         paste();
     }
 
+
+
     public void cut() {
         Clipboard cp = Clipboard.getSystemClipboard();
         ClipboardContent content = new ClipboardContent();
@@ -234,8 +232,6 @@ public class MainFormController {
         cp.setContent(content);
 
     }
-
-
 
     public void copy() {
         Clipboard cp = Clipboard.getSystemClipboard();
@@ -253,14 +249,30 @@ public class MainFormController {
 
     }
 
-    private void findText(String text,String word){
+    private void replace(){
+       String s=Pattern.compile(txtFind.getText()).matcher(txtText.getText()).replaceAll(txtReplace.getText());
+       txtText.setText(s);
+    }
 
+    private void find(){
+        indexes.clear();
+        int startingIndex=0;
+        int endingIndex=0;
+        int matchingCount=0;
+        matcher= Pattern.compile(txtFind.getText()).matcher(txtText.getText());
+        while (matcher.find()){
+            startingIndex=matcher.start();
+            endingIndex=matcher.end();
+            indexes.add(new SubString(startingIndex,endingIndex));
+            matchingCount++;
 
+        }
+        txtWordCount.setText(String.valueOf(matchingCount));
 
     }
 
 
     public void findButtonOnAction(ActionEvent actionEvent) {
-        findText(txtText.getText(),txtFind.getText());
+        findReplaceUIController(true);
     }
 }

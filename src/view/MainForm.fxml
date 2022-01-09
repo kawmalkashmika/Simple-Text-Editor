@@ -12,50 +12,53 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="704.0" prefWidth="778.0" style="-fx-background-color: #FAE5D3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
+<AnchorPane fx:id="anchorPane" prefHeight="779.0" prefWidth="1000.0" style="-fx-background-color: #FAE5D3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
    <children>
-      <TextArea fx:id="txtText" layoutX="25.0" layoutY="250.0" prefHeight="372.0" prefWidth="607.0" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="250.0" />
-      <Button layoutX="119.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnOpenOnAction" style="-fx-background-radius: 50;" text="Open" textFill="#a15f19">
+      <TextArea fx:id="txtText" layoutY="250.0" prefHeight="467.0" prefWidth="1000.0" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0" />
+      <Label layoutX="657.0" layoutY="182.0" prefHeight="42.0" prefWidth="329.0" style="-fx-background-color: #4866cc; -fx-background-radius: 50;" textFill="#4866cc" />
+      <Label layoutX="-28.0" layoutY="183.0" prefHeight="42.0" prefWidth="329.0" style="-fx-background-color: #ea7461; -fx-background-radius: 50;" textFill="#ea7461" />
+      <Label layoutX="310.0" layoutY="183.0" prefHeight="42.0" prefWidth="329.0" style="-fx-background-color: #64cc3a; -fx-background-radius: 50;" textFill="#64cc3a" />
+      <Button layoutX="92.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnOpenOnAction" style="-fx-background-radius: 50;" text="Open" textFill="#a15f19">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="202.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-radius: 50;" text="Save" textFill="#a15f19">
+      <Button layoutX="175.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="28.0" prefWidth="62.0" style="-fx-background-radius: 50;" text="Save" textFill="#a15f19">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="280.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnNewOnAction" style="-fx-background-radius: 50;" text="New" textFill="#a15f19">
+      <Button layoutX="14.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnNewOnAction" prefHeight="28.0" prefWidth="62.0" style="-fx-background-radius: 50;" text="New" textFill="#a15f19">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="352.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnCut" style="-fx-background-radius: 50;" text="Cut" textFill="#a15f19">
+      <Button layoutX="333.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnCut" prefHeight="28.0" prefWidth="74.0" style="-fx-background-radius: 50;" text="Cut" textFill="#a15f19">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="423.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnCopy" style="-fx-background-radius: 50;" text="Copy" textFill="#a15f19">
+      <Button layoutX="420.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnCopy" prefHeight="26.0" prefWidth="74.0" style="-fx-background-radius: 50;" text="Copy" textFill="#a15f19">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="495.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnPaste" style="-fx-background-radius: 50;" text="Paste" textFill="#a15f19">
+      <Button layoutX="510.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnPaste" prefHeight="28.0" prefWidth="74.0" style="-fx-background-radius: 50;" text="Paste" textFill="#a15f19">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="146.0" layoutY="14.0" prefHeight="47.0" prefWidth="366.0" text="Sample Text Editor" AnchorPane.bottomAnchor="643.0" AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="154.0" AnchorPane.topAnchor="14.0">
+      <Label layoutX="219.0" prefHeight="84.0" prefWidth="679.0" text="Sample Text Editor" AnchorPane.bottomAnchor="695.0" AnchorPane.leftAnchor="219.0" AnchorPane.rightAnchor="102.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="System Bold Italic" size="34.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="644.0" prefHeight="33.0" prefWidth="112.0" text="Version 1.0.0" textFill="#ab9a9a">
+      <Label layoutX="21.0" layoutY="727.0" prefHeight="33.0" prefWidth="371.0" text="Version 1.0.0  Copyright© Kawmal Kashmika" textFill="#ab9a9a">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <MenuBar fx:id="mnbar" layoutX="14.0" layoutY="72.0" prefHeight="29.0" prefWidth="161.0">
+      <MenuBar fx:id="mnbar" layoutX="14.0" layoutY="87.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="161.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -81,7 +84,10 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TextField fx:id="txtFind" layoutX="253.0" layoutY="73.0" prefHeight="28.0" prefWidth="161.0" />
+      <TextField fx:id="txtFind" layoutX="752.0" layoutY="189.0" prefHeight="29.0" prefWidth="208.0" promptText="Find your word here..." style="-fx-background-radius: 50;">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></TextField>
       <TextField fx:id="txtReplace" layoutX="255.0" layoutY="116.0" prefHeight="28.0" prefWidth="161.0" />
       <RadioButton fx:id="radioRegx" layoutX="508.0" layoutY="78.0" mnemonicParsing="false" text="RegX">
          <font>
@@ -93,9 +99,23 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </RadioButton>
-      <Button layoutX="433.0" layoutY="74.0" mnemonicParsing="false" onAction="#findButtonOnAction" text="Find" />
+      <Button layoutX="684.0" layoutY="189.0" mnemonicParsing="false" onAction="#findButtonOnAction" style="-fx-background-radius: 50;" text="Find" textFill="#a15f19">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
       <Button fx:id="btnNext" layoutX="509.0" layoutY="103.0" mnemonicParsing="false" text="Next" />
       <Button fx:id="btnPrevious" layoutX="503.0" layoutY="144.0" mnemonicParsing="false" text="Previous" />
+      <Button fx:id="btnReplace" layoutX="425.0" layoutY="116.0" mnemonicParsing="false" text="Replace" />
+      <Label layoutX="800.0" layoutY="735.0" prefHeight="26.0" prefWidth="112.0" text="Word count">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtWordCount" layoutX="924.0" layoutY="730.0" prefHeight="29.0" prefWidth="49.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
    </children>
    <effect>
       <Blend />
