@@ -12,53 +12,59 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="779.0" prefWidth="1000.0" style="-fx-background-color: #FAE5D3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
+<AnchorPane fx:id="anchorPane" prefHeight="826.0" prefWidth="995.0" style="-fx-background-color: #FAE5D3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
    <children>
-      <TextArea fx:id="txtText" layoutY="250.0" prefHeight="467.0" prefWidth="1000.0" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0" />
-      <Label layoutX="657.0" layoutY="182.0" prefHeight="42.0" prefWidth="329.0" style="-fx-background-color: #4866cc; -fx-background-radius: 50;" textFill="#4866cc" />
-      <Label layoutX="-28.0" layoutY="183.0" prefHeight="42.0" prefWidth="329.0" style="-fx-background-color: #ea7461; -fx-background-radius: 50;" textFill="#ea7461" />
-      <Label layoutX="310.0" layoutY="183.0" prefHeight="42.0" prefWidth="329.0" style="-fx-background-color: #64cc3a; -fx-background-radius: 50;" textFill="#64cc3a" />
-      <Button layoutX="92.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnOpenOnAction" style="-fx-background-radius: 50;" text="Open" textFill="#a15f19">
+      <TextArea fx:id="txtText" layoutY="263.0" prefHeight="546.0" prefWidth="995.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="263.0" />
+      <Label fx:id="lblReplace" layoutX="570.0" layoutY="130.0" prefHeight="42.0" prefWidth="416.0" style="-fx-background-color: #da52ca; -fx-background-radius: 50;" textFill="#da52ca" />
+      <Label layoutX="570.0" layoutY="182.0" prefHeight="42.0" prefWidth="416.0" style="-fx-background-color: #4866cc; -fx-background-radius: 50;" textFill="#4866cc" />
+      <Label layoutX="-28.0" layoutY="183.0" prefHeight="42.0" prefWidth="281.0" style="-fx-background-color: #ea7461; -fx-background-radius: 50;" textFill="#ea7461" />
+      <Label layoutX="262.0" layoutY="183.0" prefHeight="42.0" prefWidth="300.0" style="-fx-background-color: #64cc3a; -fx-background-radius: 50;" textFill="#64cc3a" />
+      <Label fx:id="txtWordCount" layoutX="853.0" layoutY="229.0" prefHeight="29.0" prefWidth="112.0">
          <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="175.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="28.0" prefWidth="62.0" style="-fx-background-radius: 50;" text="Save" textFill="#a15f19">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="14.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnNewOnAction" prefHeight="28.0" prefWidth="62.0" style="-fx-background-radius: 50;" text="New" textFill="#a15f19">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="333.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnCut" prefHeight="28.0" prefWidth="74.0" style="-fx-background-radius: 50;" text="Cut" textFill="#a15f19">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="420.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnCopy" prefHeight="26.0" prefWidth="74.0" style="-fx-background-radius: 50;" text="Copy" textFill="#a15f19">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="510.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnPaste" prefHeight="28.0" prefWidth="74.0" style="-fx-background-radius: 50;" text="Paste" textFill="#a15f19">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Label layoutX="219.0" prefHeight="84.0" prefWidth="679.0" text="Sample Text Editor" AnchorPane.bottomAnchor="695.0" AnchorPane.leftAnchor="219.0" AnchorPane.rightAnchor="102.0" AnchorPane.topAnchor="0.0">
-         <font>
-            <Font name="System Bold Italic" size="34.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="21.0" layoutY="727.0" prefHeight="33.0" prefWidth="371.0" text="Version 1.0.0  Copyright© Kawmal Kashmika" textFill="#ab9a9a">
+      <Button layoutX="81.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnOpenOnAction" style="-fx-background-radius: 50;" text="Open" textFill="#a15f19">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="159.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="28.0" prefWidth="62.0" style="-fx-background-radius: 50;" text="Save" textFill="#a15f19">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="8.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnNewOnAction" prefHeight="28.0" prefWidth="62.0" style="-fx-background-radius: 50;" text="New" textFill="#a15f19">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="284.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnCut" prefHeight="28.0" prefWidth="74.0" style="-fx-background-radius: 50;" text="Cut" textFill="#a15f19">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="370.0" layoutY="188.0" mnemonicParsing="false" onAction="#btnCopy" prefHeight="26.0" prefWidth="74.0" style="-fx-background-radius: 50;" text="Copy" textFill="#a15f19">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="456.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnPaste" prefHeight="28.0" prefWidth="74.0" style="-fx-background-radius: 50;" text="Paste" textFill="#a15f19">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="-108.0" layoutY="26.0" prefHeight="71.0" prefWidth="976.0" style="-fx-background-color: #9b5cc5; -fx-background-radius: 50;" text="                  Sample Text Editor" textFill="#201f25" AnchorPane.bottomAnchor="765.0" AnchorPane.leftAnchor="-108.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="26.0">
+         <font>
+            <Font name="Purisa Bold" size="37.0" />
+         </font>
+      </Label>
+      <Label layoutX="15.0" layoutY="818.0" prefHeight="33.0" prefWidth="371.0" text="Version 1.0.0  Copyright© Kawmal Kashmika" textFill="#ab9a9a">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <MenuBar fx:id="mnbar" layoutX="14.0" layoutY="87.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="161.0">
+      <MenuBar fx:id="mnbar" layoutY="109.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="29.0" prefWidth="161.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -84,34 +90,41 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TextField fx:id="txtFind" layoutX="752.0" layoutY="189.0" prefHeight="29.0" prefWidth="208.0" promptText="Find your word here..." style="-fx-background-radius: 50;">
+      <TextField fx:id="txtFind" layoutX="644.0" layoutY="189.0" prefHeight="29.0" prefWidth="208.0" promptText="Find your word here..." style="-fx-background-radius: 50;">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></TextField>
-      <TextField fx:id="txtReplace" layoutX="255.0" layoutY="116.0" prefHeight="28.0" prefWidth="161.0" />
-      <RadioButton fx:id="radioRegx" layoutX="508.0" layoutY="78.0" mnemonicParsing="false" text="RegX">
+      <TextField fx:id="txtReplace" layoutX="581.0" layoutY="134.0" prefHeight="33.0" prefWidth="208.0" promptText="Replace text here..." style="-fx-background-radius: 50;">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></TextField>
+      <RadioButton fx:id="radioRegx" layoutX="653.0" layoutY="230.0" mnemonicParsing="false" text="RegX">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="radioUppercase" layoutX="589.0" layoutY="78.0" mnemonicParsing="false" text="Upper Case">
+      <RadioButton fx:id="radioUppercase" layoutX="734.0" layoutY="230.0" mnemonicParsing="false" text="Upper Case">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </RadioButton>
-      <Button layoutX="684.0" layoutY="189.0" mnemonicParsing="false" onAction="#findButtonOnAction" style="-fx-background-radius: 50;" text="Find" textFill="#a15f19">
+      <Button layoutX="582.0" layoutY="189.0" mnemonicParsing="false" onAction="#findButtonOnAction" style="-fx-background-radius: 50;" text="Find" textFill="#a15f19">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Button fx:id="btnNext" layoutX="509.0" layoutY="103.0" mnemonicParsing="false" text="Next" />
-      <Button fx:id="btnPrevious" layoutX="503.0" layoutY="144.0" mnemonicParsing="false" text="Previous" />
-      <Button fx:id="btnReplace" layoutX="425.0" layoutY="116.0" mnemonicParsing="false" text="Replace" />
-      <Label layoutX="800.0" layoutY="735.0" prefHeight="26.0" prefWidth="112.0" text="Word count">
+      <Button fx:id="btnNext" layoutX="919.0" layoutY="189.0" mnemonicParsing="false" text="-&gt;" textFill="#8a8414">
          <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="txtWordCount" layoutX="924.0" layoutY="730.0" prefHeight="29.0" prefWidth="49.0">
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Button fx:id="btnPrevious" layoutX="863.0" layoutY="189.0" mnemonicParsing="false" text="&lt;-" textFill="#8a8414">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Button fx:id="btnReplace" layoutX="800.0" layoutY="138.0" mnemonicParsing="false" style="-fx-background-radius: 50;" text="Replace">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Label fx:id="lbltokens" layoutX="799.0" layoutY="817.0" prefHeight="26.0" prefWidth="112.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

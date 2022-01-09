@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,7 +44,10 @@ public class MainFormController {
     public Matcher matcher;
     public Button btnPrevious;
     public Label txtWordCount;
+    public Label lblReplace;
+    public Label lbltokens;
     ArrayList<SubString> indexes=new ArrayList<>();
+    StringTokenizer tokenizer;
     public static int counter=-1;
 
 
@@ -78,7 +82,12 @@ public class MainFormController {
         find();
     });
     txtText.textProperty().addListener(observable -> {
-        find();
+        if(!txtFind.getText().equals("")){
+            find();
+        }
+        tokenizer = new StringTokenizer(txtText.getText());
+        lbltokens.setText(  tokenizer.countTokens()+" words");
+
     });
 
     }
@@ -116,6 +125,7 @@ public class MainFormController {
         btnPrevious.setVisible(visibility);
         btnReplace.setVisible(visibility);
         txtReplace.setVisible(visibility);
+        lblReplace.setVisible(visibility);
     }
 
 
@@ -267,7 +277,8 @@ public class MainFormController {
             matchingCount++;
 
         }
-        txtWordCount.setText(String.valueOf(matchingCount));
+        txtWordCount.setText(String.valueOf(matchingCount)+" results");
+
 
     }
 
