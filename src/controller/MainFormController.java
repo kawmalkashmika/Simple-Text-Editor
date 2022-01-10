@@ -2,6 +2,7 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
@@ -46,6 +47,13 @@ public class MainFormController {
     public Label txtWordCount;
     public Label lblReplace;
     public Label lbltokens;
+    public ImageView imgNew;
+    public Button btnOpen;
+    public Button btnSave;
+    public Button btnNew;
+    public Button btnCut;
+    public Button btnCopy;
+    public Button btnPaste;
     ArrayList<SubString> indexes=new ArrayList<>();
     StringTokenizer tokenizer;
     public static int counter=-1;
@@ -55,6 +63,11 @@ public class MainFormController {
 
     menuItemlistners();
     findReplaceUIController(false);
+
+
+    imgNew.setOnKeyPressed(event -> {
+        btnNew.fire();
+    });
 
     btnReplace.setOnAction(event -> {
         replace();
